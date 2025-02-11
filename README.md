@@ -1,4 +1,5 @@
 ### Boston House Pricing Prediction
+[Website](https://bostonhousepricing-x25a.onrender.com)
 
 ### Software And Tools Requirements
 
@@ -43,3 +44,6 @@ Test with this json data
     }
 }
 ```
+
+### Deployment
+The website is manually deployed through [Render](https://render.com/)
