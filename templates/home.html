@@ -1,49 +1,158 @@
-
 <!DOCTYPE html>
-<html >
+<html>
 
 <head>
   <meta charset="UTF-8">
   <title>ML API</title>
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arimo', sans-serif;
+      background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+      overflow: auto; /* Allow scrolling if content exceeds 100vh */
+    }
 
-  
+    .login {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      margin: 20px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    /* Main Container */
+    .main {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Form Styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #3498db;
+    }
+
+    input[type="text"]::placeholder {
+      color: #999;
+    }
+
+    /* Button Styles */
+    .btn {
+      background: #3498db;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #2980b9;
+    }
+
+    /* Prediction Text */
+    .prediction-text {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      input[type="text"] {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+
+      .btn {
+        padding: 8px;
+        font-size: 0.9rem;
+      }
+
+      .prediction-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
- <div class="login">
-	<h1>Boston House Price Prediction</h1>
+  <div class="login">
+    <h1>Boston House Price Prediction</h1>
 
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post">
-      <input type="text" name="CRIM" placeholder="CRIM" required="required" /><br>
-    	<input type="text" name="ZN" placeholder="ZN" required="required" /><br>
-        <input type="text" name="INDUS" placeholder="INDUS" required="required" /><br>
-        <input type="text" name="CHAS" placeholder="CHAS" required="required" /><br>
-        <input type="text" name="NOX" placeholder="NOX" required="required" /><br>
-        <input type="text" name="RM" placeholder="RM" required="required" /><br>
-        <input type="text" name="Age" placeholder="Age" required="required" /><br>
-        <input type="text" name="DIS" placeholder="DIS" required="required" /><br>
-        <input type="text" name="RAD" placeholder="RAD" required="required" /><br>
-        <input type="text" name="TAX" placeholder="TAX" required="required" /><br>
-        <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" /><br>
-        <input type="text" name="B" placeholder="B" required="required" /><br>
-        <input type="text" name="LSTAT" placeholder="LSTAT" required="required" /><br>
-
-       
+    <div class="main">
+      <!-- Main Input For Receiving Query to our ML -->
+      <form action="{{ url_for('predict')}}" method="post">
+        <input type="text" name="CRIM" placeholder="CRIM" required="required" />
+        <input type="text" name="ZN" placeholder="ZN" required="required" />
+        <input type="text" name="INDUS" placeholder="INDUS" required="required" />
+        <input type="text" name="CHAS" placeholder="CHAS" required="required" />
+        <input type="text" name="NOX" placeholder="NOX" required="required" />
+        <input type="text" name="RM" placeholder="RM" required="required" />
+        <input type="text" name="Age" placeholder="Age" required="required" />
+        <input type="text" name="DIS" placeholder="DIS" required="required" />
+        <input type="text" name="RAD" placeholder="RAD" required="required" />
+        <input type="text" name="TAX" placeholder="TAX" required="required" />
+        <input type="text" name="PTRATIO" placeholder="PTRATIO" required="required" />
+        <input type="text" name="B" placeholder="B" required="required" />
+        <input type="text" name="LSTAT" placeholder="LSTAT" required="required" />
 
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
+      </form>
+    </div>
 
-   <br>
-   <br>
-  
-   
- </div>
- {{prediction_text}}
+    <br>
+    <br>
 
+    <!-- Prediction Text -->
+    <div class="prediction-text">
+      {{prediction_text}}
+    </div>
+  </div>
 </body>
+
 </html>
